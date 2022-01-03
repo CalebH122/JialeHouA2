@@ -15,14 +15,10 @@ class Movie:
         self.is_watched = is_watched
 
     def not_watch(self):
-        if not self.is_watched:
-            self.is_watched = "Unwatch"
-            return self.is_watched
+        self.is_watched = False
 
     def watched(self):
-        if self.is_watched:
-            self.is_watched = "Watched"
-            return self.is_watched
+        self.is_watched = True
 
     def __str__(self):
         return f"Title: {self.title} Category: {self.category} Year: {self.year} Watched: {self.is_watched}"
