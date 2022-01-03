@@ -16,6 +16,7 @@ def run_tests():
 
     # Test initial-value movie
     initial_movie = Movie("Thor: Ragnarok", 2017, "Comedy", True)
+    print(initial_movie)
     # TODO: Write tests to show this initialisation works
 
     # TODO: Add more tests, as appropriate, for each method
