@@ -12,3 +12,11 @@ class Movie:
         self.category = category
         self.year = year
         self.is_watch = is_watch
+
+    def is_watch(self):
+        if not self.is_watch:
+            self.is_watch = False
+            return self.is_watch
+        else:
+            self.is_watch = True
+            return self.is_watch
