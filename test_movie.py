@@ -24,7 +24,7 @@ def run_tests():
     print(movie_two)
     # TODO: Add more tests, as appropriate, for each method
     print("Movie three:")
-    movie_three = Movie("The fugitive", 1993, "Drama", False)
+    movie_three = Movie("The fugitive", 1993, "Drama", True)
     movie_three.not_watch()
     print(movie_three)
 
@@ -33,7 +33,7 @@ def run_tests():
     movie_four.title = "LALALA"
     movie_four.year = 2022
     movie_four.category = "Action"
-    movie_four.is_watched = True
+    movie_four.is_watched = False
     movie_four.watched()
     print(movie_four)
 
