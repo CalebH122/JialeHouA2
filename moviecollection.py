@@ -23,7 +23,12 @@ class MovieCollection(Movie):
         with open(file, 'r') as movie_file:
             movies = csv.reader(movie_file)
             for movie in movies:
-
-                new_movie = Movie(movie[0], movie[1], movie[2], movie[3])
-                self.movies.append(new_movie)
+                if movie[3] == 'w':
+                    movie[3] = 'Watched'
+                    new_movie = Movie(movie[0], movie[1], movie[2], movie[3])
+                    self.movies.append(new_movie)
+                else:
+                    movie[3] = 'Not watch'
+                    new_movie = Movie(movie[0], movie[1], movie[2], movie[3])
+                    self.movies.append(new_movie)
 
