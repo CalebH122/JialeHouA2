@@ -12,6 +12,12 @@ class Movie:
         self.title = title
         self.category = category
         self.year = year
+        if is_watched == "u":
+            is_watched = False
+        elif is_watched == "w":
+            is_watched = True
+        else:
+            pass
         self.is_watched = is_watched
 
     def not_watch(self):

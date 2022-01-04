@@ -17,20 +17,20 @@ class MovieCollection(Movie):
             return "No movie"
         else:
             for movie in self.movies:
-                print(movie)
+                if movie.is_watched:
+                    status = "Watched"
+                    Movie(movie.title, movie.year, movie.category, status)
+                else:
+                    status = "Un-watch"
+                    Movie(movie.title, movie.year, movie.category, status)
 
     def load_movies(self, file):
         with open(file, 'r') as movie_file:
             movies = csv.reader(movie_file)
             for movie in movies:
-                if movie[3] == 'w':
-                    movie.is_watched = True
-                    new_movie = Movie(movie[0], movie[1], movie[2], movie.is_watched)
-                    self.movies.append(new_movie)
-                else:
-                    movie.is_watched = False
-                    new_movie = Movie(movie[0], movie[1], movie[2], movie.is_watched)
-                    self.movies.append(new_movie)
+                new_movie = Movie(movie[0], movie[1], movie[2], movie[3])
+                self.movies.append(new_movie)
+        movie_file.close()
 
     def add_movie(self, new_movie):
         self.movies.append(new_movie)
