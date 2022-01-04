@@ -28,7 +28,13 @@ def run_tests():
     movie_collection.sort("year")
     print(movie_collection)
     # TODO: Add more sorting tests
+    print("New sorting test - title:")
+    movie_collection.sort("title")
+    print(movie_collection)
 
+    print("New sorting test - is_watched:")
+    movie_collection.sort("is_watched")
+    print(movie_collection)
     # TODO: Test saving movies (check CSV file manually to see results)
 
     # TODO: Add more tests, as appropriate, for each method

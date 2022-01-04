@@ -28,3 +28,4 @@ class Movie:
 
     def __str__(self):
         return f"Title: {self.title} Category: {self.category} Year: {self.year} Watched: {self.is_watched}"
+
