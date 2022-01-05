@@ -36,10 +36,24 @@ class MovieCollection(Movie):
     def save_movies(self, file):
         save_file = open(file, 'w')
         for movie in self.movies:
-            if movie.is_watched:
+            if movie.is_watched is True:
                 movie.is_watched = 'w'
             else:
                 movie.is_watched = 'u'
-            input_movie = f"{movie.title}, {movie.year}, {movie.category}, {movie.is_watched}"
+            input_movie = f"{movie.title},{movie.year},{movie.category},{movie.is_watched}"
             print(input_movie, file=save_file)
         save_file.close()
+
+    def un_watched_num(self):
+        un_watched_movies = 0
+        for movie in self.movies:
+            if not movie.is_watched:
+                un_watched_movies += 1
+        return un_watched_movies
+
+    def watched_movie_num(self):
+        watched_movies = 0
+        for movie in self.movies:
+            if movie.is_watched:
+                watched_movies += 1
+        return watched_movies

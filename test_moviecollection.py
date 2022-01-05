@@ -32,12 +32,23 @@ def run_tests():
     movie_collection.sort("title")
     print(movie_collection)
 
-    print("New sorting test - is_watched:")
-    movie_collection.sort("is_watched")
+    print("New sorting test - category:")
+    movie_collection.sort("category")
     print(movie_collection)
     # TODO: Test saving movies (check CSV file manually to see results)
     movie_collection.save_movies('movies.csv')
     # TODO: Add more tests, as appropriate, for each method
+    print("Final test: ")
+    movie_collection.watched()
+    movie_collection.movies.clear()
+    movie_collection.load_movies('movies.csv')
+    movie_collection.add_movie(Movie("ABCDEFG", 1234, "Action", True))
+    movie_collection.sort("year")
+    print(f"Watched movie number: {movie_collection.watched_movie_num()}")
+    print(f"Un-watch movie number: {movie_collection.un_watched_num()}")
+    print(movie_collection)
+
+
 
 
 run_tests()
