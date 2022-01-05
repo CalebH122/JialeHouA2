@@ -32,3 +32,14 @@ class MovieCollection(Movie):
 
     def sort(self, sort_choice):
         self.movies = sorted(self.movies, key=attrgetter(sort_choice))
+
+    def save_movies(self, file):
+        save_file = open(file, 'w')
+        for movie in self.movies:
+            if movie.is_watched:
+                movie.is_watched = 'w'
+            else:
+                movie.is_watched = 'u'
+            input_movie = f"{movie.title}, {movie.year}, {movie.category}, {movie.is_watched}"
+            print(input_movie, file=save_file)
+        save_file.close()

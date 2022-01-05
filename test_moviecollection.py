@@ -36,7 +36,7 @@ def run_tests():
     movie_collection.sort("is_watched")
     print(movie_collection)
     # TODO: Test saving movies (check CSV file manually to see results)
-
+    movie_collection.save_movies('movies.csv')
     # TODO: Add more tests, as appropriate, for each method
 
 
