@@ -49,6 +49,4 @@ def run_tests():
     print(movie_collection)
 
 
-
-
 run_tests()

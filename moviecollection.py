@@ -17,7 +17,7 @@ class MovieCollection(Movie):
         if not self.movies:
             return "No movie"
         else:
-            return '\n'.join(str(movie) for movie in self.movies)
+            return '\n'.join(f"{num+1}. {movie}" for num, movie in enumerate(self.movies))
 
     def load_movies(self, file):
         with open(file, 'r') as movie_file:

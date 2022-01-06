@@ -16,7 +16,7 @@ Q - Quit"""
 
 def main():
     """This is the main function(structure of this program), witch is include all functions under it."""
-    movies = MovieCollection()  # Load function. line 163
+    movies = MovieCollection()
     movies.load_movies('movies.csv')
     print("{} movies are loaded".format(movies.watched_movie_num() + movies.un_watched_num()))
     movies.sort('year')  # Sort movie function. line 156
@@ -27,7 +27,7 @@ def main():
             user_input = input(f"{MENU}\n>>> ").upper()
         elif user_input == 'A':
             add_movie(movies)  # Add movie function. line 57
-            sort_movies(movies)  # Sort movie function. line 156
+            movies.sort('year')  # Sort movie function. line 156
             user_input = input(f"{MENU}\n>>> ").upper()
         elif user_input == 'W':
             watch_movie(movies)  # Watch movie function. line 113
@@ -35,37 +35,23 @@ def main():
         else:
             print("Invalid menu choice")
             user_input = input(f"{MENU}\n>>> ").upper()
-    save_movies(movies)  # Save movie information function. line 174
-    print("{} movies saved to movies.csv\nHave a nice day :)".format(len(movies)))
+    movies.save_movies('movies.csv')  # Save movie information function. line 174
+    print(f"{movies.watched_movie_num() + movies.un_watched_num()} movies saved to movies.csv\nHave a nice day :)")
 
 
 def show_movie(movies):
     """This is the fist function, this function is designed to show all the movies in the list."""
-    watched_movie = 0
-    unwatch_movie = 0
-    for num, movie in enumerate(movies):
-        if movie[3] == 'u':
-            unwatch_movie = unwatch_movie + 1
-            print(f"{num}. *  {movie[0]:<35} - {movie[1]:>4} ({movie[2]})")
-        else:
-            watched_movie = watched_movie + 1
-            print(f"{num}.    {movie[0]:<35} - {movie[1]:>4} ({movie[2]})")
-    print("{} movies watched, {} movies still to watch.".format(watched_movie, unwatch_movie))
+    print(movies)
 
 
 def add_movie(movies):
     """This function will collect information of new movie, and add it to the movie list"""
-    new_movie = []
     movie_name = name_check()  # line 103
-    new_movie.append(movie_name)
     movie_year = year_check()  # line 81
-    new_movie.append(movie_year)
     movie_category = category_check()  # line 71
-    new_movie.append(movie_category)
-    movie_status = 'u'
-    new_movie.append(movie_status)
+    movie_status = False
     print("{} ({} from {}) is added to movie list".format(movie_name, movie_category, movie_year))
-    movies.append(new_movie)
+    movies.add_movie(Movie(movie_name, movie_year, movie_category, movie_status))
 
 
 def category_check():
@@ -114,8 +100,7 @@ def watch_movie(movies):
     """This is watch movie function. It will check if there is any movie not watched yet. If no, it will tell you there
     are no movie left for you to watch. If yes, you will have to enter the movie number to change the movie status as
     watched for the movie you want to watch. Also this function will error check your input for movie number."""
-    unwatch_movie = movie_count(movies)  # Count unwatch movie function. line 143
-    if unwatch_movie == 0:
+    if movies.un_watched_num() == 0:
         print("No more movies to watch!")
     else:
         movie_choice = input("Enter the number of a movie to mark as watched\n>>> ")
@@ -123,7 +108,7 @@ def watch_movie(movies):
         while not is_valid:
             try:
                 movie_choice = int(movie_choice)
-                if movie_choice > len(movies) - 1:
+                if movie_choice > movies.un_watched_num() + movies.watched_movie_num():
                     print("Invalid movie number")
                     movie_choice = input(">>> ")
                 elif movie_choice < 0:
@@ -135,22 +120,12 @@ def watch_movie(movies):
                 print("Invalid input; enter a valid number")
                 movie_choice = input(">>>")
 
-        movie = movies[movie_choice]
-        if movie[3] == 'u':
-            print(f"{movie[0]} form {movie[1]} watched")
-            movie[3] = 'w'
+        movie = movies.movies[movie_choice-1]
+        if movie.is_watched is False:
+            print(f"{movie.title} form {movie.year} watched")
+            movie.watched()
         else:
-            print(f"You have already watched {movie[0]}")
-
-
-def movie_count(movies):
-    """This function will count how many unwatch movies are there, this function is important
-     for watch movie function."""
-    unwatch_movie = 0
-    for movie in movies:
-        if movie[3] == 'u':
-            unwatch_movie = unwatch_movie + 1
-    return unwatch_movie
+            print(f"You have already watched {movie.title}")
 
 
 def sort_movies(movies):
@@ -158,17 +133,6 @@ def sort_movies(movies):
     for movie in movies:
         movie[1] = int(movie[1])
     movies.sort(key=lambda x: (x[1], x[2]))
-
-
-def load_movies():
-    """This function is the very first function, it will load movie information into a list for further modification."""
-    movies = open("movies.csv", 'r')
-    movie_list = []
-    for line in movies:
-        movie = line.strip().split(',')
-        movie_list.append(movie)
-    movies.close()
-    return movie_list
 
 
 def save_movies(movies):

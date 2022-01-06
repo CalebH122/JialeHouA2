@@ -27,5 +27,5 @@ class Movie:
         self.is_watched = True
 
     def __str__(self):
-        return f"{self.title} {self.category} {self.year} {self.is_watched}"
+        return f"{self.title} {self.year} {self.category} {self.is_watched}"
 
