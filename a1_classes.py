@@ -16,9 +16,10 @@ Q - Quit"""
 
 def main():
     """This is the main function(structure of this program), witch is include all functions under it."""
-    movies = load_movies()  # Load function. line 163
-    print("{} movies are loaded".format(len(movies)))
-    sort_movies(movies)  # Sort movie function. line 156
+    movies = MovieCollection()  # Load function. line 163
+    movies.load_movies('movies.csv')
+    print("{} movies are loaded".format(movies.watched_movie_num() + movies.un_watched_num()))
+    movies.sort('year')  # Sort movie function. line 156
     user_input = input(f"{MENU}\n>>> ").upper()
     while user_input != 'Q':
         if user_input == 'L':
