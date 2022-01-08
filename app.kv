@@ -3,15 +3,49 @@ BoxLayout:
     orientation:'horizontal'
     BoxLayout:
         orientation:'vertical'
+        size_hint_x: 0.4
         Label:
             text: 'Sort by'
         Label:
             text: 'Add New Movie...'
         Label:
-            text: 'Name'
+            text: 'Title:'
         TextInput:
             text: ''
             multiline: False
-            id: font_name
+            id: title
         Label:
-            text: 'Country'
+            text: 'Category:'
+        TextInput:
+            text: ''
+            multiline: False
+            id: category
+        Label:
+            text: 'Year:'
+        TextInput:
+            text: ''
+            multiline: False
+            id: year
+        Button:
+            text: 'Add Movie'
+        Button:
+            text: 'Clear'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.075
+            Label:
+                text: ''
+                size_hint_y: 0.25
+        BoxLayout:
+            orientation: 'vertical'
+            id: movie_list
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.075
+            Label:
+                size_hint_y: 0.25
+                orientation: 'vertical'
+                text: app.status
