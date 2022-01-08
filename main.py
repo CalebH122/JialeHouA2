@@ -26,6 +26,7 @@ class MoviesToWatchApp(App):
         self.title = "Movie to watch 2.0"
         self.root = Builder.load_file('app.kv')
         self.load_movies()
+        self.sort('category')
         return self.root
 
     def load_movies(self):
@@ -40,6 +41,11 @@ class MoviesToWatchApp(App):
                 movie_button.background_color = (0.1, 0.8, 0.8, 1)
             movie_button.text = f'{movie.title} ({movie.category} from {movie.year}) {movie.is_watched}'
             self.root.ids.movie_list.add_widget(movie_button)
+
+    def sort(self, choice):
+        self.movies_to_watch.sort(choice)
+        self.root.ids.movie_list.clear_widgets()
+        self.load_movies()
 
 
 if __name__ == '__main__':

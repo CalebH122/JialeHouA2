@@ -6,6 +6,11 @@ BoxLayout:
         size_hint_x: 0.4
         Label:
             text: 'Sort by'
+        Spinner:
+            id: sort
+            text: 'category'
+            values: 'title', 'category', 'year', 'is_watched'
+            on_text: app.sort(self.text)
         Label:
             text: 'Add New Movie...'
         Label:
