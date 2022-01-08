@@ -15,11 +15,16 @@ from kivy.core.window import Window
 
 class MoviesToWatchApp(App):
     """..."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.movies_to_watch = MovieCollection()
         self.movies_to_watch.load_movies('movies.csv')
 
+    def build(self):
+        self.title = "Movie to watch 2.0"
+        self.root = Builder.load_file('app.kv')
+        return self.root
 
 if __name__ == '__main__':
     MoviesToWatchApp().run()

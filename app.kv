@@ -1,2 +1,17 @@
 # TODO: Create your Kivy layout in the kv language here
 BoxLayout:
+    orientation:'horizontal'
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Sort by'
+        Label:
+            text: 'Add New Movie...'
+        Label:
+            text: 'Name'
+        TextInput:
+            text: ''
+            multiline: False
+            id: font_name
+        Label:
+            text: 'Country'
