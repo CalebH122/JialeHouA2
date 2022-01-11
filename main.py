@@ -84,7 +84,23 @@ class MoviesToWatchApp(App):
                 self.root.ids.announcement.text = 'Category must be one of Action, Comedy, Documentary, Drama, ' \
                                                   'Fantasy, Thriller '
             else:
-                pass
+                self.movies_to_watch.add_movie(
+                    Movie(self.root.ids.title.text, self.root.ids.year.text, self.root.ids.category.text,
+                          False))
+                self.load_movies()
+                self.root.ids.announcement.text = ''
+                self.root.ids.title.text = ''
+                self.root.ids.year.text = ''
+                self.root.ids.category.text = ''
+                self.sort(self.root.ids.sort.text)
+        except ValueError:
+            self.root.ids.announcement.text = 'Please enter a valid number'
+
+    def clear_text(self):
+        self.root.ids.title.text = ""
+        self.root.ids.year.text = ""
+        self.root.ids.category.text = ""
+        self.root.ids.announcement.text = "Clear all fields"
 
 
 if __name__ == '__main__':
