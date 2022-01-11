@@ -31,7 +31,7 @@ class MovieCollection(Movie):
         self.movies.append(new_movie)
 
     def sort(self, sort_choice):
-        self.movies = sorted(self.movies, key=attrgetter(sort_choice))
+        self.movies = sorted(self.movies, key=attrgetter(sort_choice, 'year'))
 
     def save_movies(self, file):
         save_file = open(file, 'w')

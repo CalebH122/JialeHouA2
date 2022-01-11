@@ -25,7 +25,7 @@ class MoviesToWatchApp(App):
         self.title = "Movie to watch 2.0"
         self.root = Builder.load_file('app.kv')
         self.load_movies()
-        self.sort('category')
+        self.sort(self.root.ids.sort.text)
         return self.root
 
     def load_movies(self):
@@ -41,7 +41,7 @@ class MoviesToWatchApp(App):
             movie_button.text = f'{movie.title} ({movie.category} from {movie.year}) {movie.is_watched}'
             self.root.ids.movie_list.add_widget(movie_button)
             movie_button.bind(on_press=self.change_button)
-            self.root.ids.watch_movie_status.text = f'To watch: {self.movies_to_watch.un_watched_num()}. Watched: {self.movies_to_watch.watched_movie_num()}'
+            self.root.ids.watch_movie_status.text = f'To watch: {self.movies_to_watch.un_watched_num()}. Watched: {self.movies_to_watch.watched_movie_num()} '
 
     def sort(self, sort_choice):
         self.movies_to_watch.sort(sort_choice)

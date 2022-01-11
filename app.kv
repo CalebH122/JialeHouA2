@@ -19,18 +19,21 @@ BoxLayout:
             text: ''
             multiline: False
             id: title
-        Label:
-            text: 'Year:'
-        TextInput:
-            text: ''
-            multiline: False
-            id: year
+            write_tab: False
         Label:
             text: 'Category:'
         TextInput:
             text: ''
             multiline: False
             id: category
+            write_tab: False
+        Label:
+            text: 'Year:'
+        TextInput:
+            text: ''
+            multiline: False
+            id: year
+            write_tab: False
         Button:
             text: 'Add Movie'
             on_press: app.add_movie()
