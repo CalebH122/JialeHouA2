@@ -55,11 +55,36 @@ class MoviesToWatchApp(App):
                     movie.is_watched = False
                     self.root.ids.movie_list.clear_widgets()
                     self.load_movies()
+                    if movie.is_watched:
+                        self.root.ids.announcement.text = f'You have watched {movie.title}'
+                    else:
+                        self.root.ids.announcement.text = f'You need to watch {movie.title}'
                 else:
                     movie.is_watched = True
                     self.root.ids.movie_list.clear_widgets()
                     self.load_movies()
+                    if movie.is_watched:
+                        self.root.ids.announcement.text = f'You have watched {movie.title}'
+                    else:
+                        self.root.ids.announcement.text = f'You need to watch {movie.title}'
         self.sort(self.root.ids.sort.text)
+
+    def add_movie(self):
+        category_list = ['Action', 'Comedy', 'Documentary', 'Drama', 'Fantasy', 'Thriller']
+        try:
+            if self.root.ids.title.text == '':
+                self.root.ids.announcement.text = 'All fields are must be completed'
+            elif self.root.ids.year.text == '':
+                self.root.ids.announcement.text = 'All fields are must be completed'
+            elif self.root.ids.category.text == '':
+                self.root.ids.announcement.text = 'All fields are must be completed'
+            elif int(self.root.ids.year.text) <= 0:
+                self.root.ids.announcement.text = 'Year must be > 0'
+            elif self.root.ids.category.text not in category_list:
+                self.root.ids.announcement.text = 'Category must be one of Action, Comedy, Documentary, Drama, ' \
+                                                  'Fantasy, Thriller '
+            else:
+                pass
 
 
 if __name__ == '__main__':

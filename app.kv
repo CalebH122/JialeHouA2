@@ -20,21 +20,23 @@ BoxLayout:
             multiline: False
             id: title
         Label:
-            text: 'Category:'
-        TextInput:
-            text: ''
-            multiline: False
-            id: category
-        Label:
             text: 'Year:'
         TextInput:
             text: ''
             multiline: False
             id: year
+        Label:
+            text: 'Category:'
+        TextInput:
+            text: ''
+            multiline: False
+            id: category
         Button:
             text: 'Add Movie'
+            on_press: app.add_movie()
         Button:
             text: 'Clear'
+            on_press: app.clear_text()
 
     BoxLayout:
         orientation: 'vertical'
