@@ -103,7 +103,6 @@ class MoviesToWatchApp(App):
         self.root.ids.announcement.text = ""
 
     def on_stop(self):
-        print(self.movies_to_watch)
         self.movies_to_watch.save_movies('movies.csv')
 
 
