@@ -17,7 +17,7 @@ class MovieCollection(Movie):
         if not self.movies:
             return "No movie"
         else:
-            return '\n'.join(f"{num+1}. {movie}" for num, movie in enumerate(self.movies))
+            return '\n'.join(f"{num + 1}. {movie}" for num, movie in enumerate(self.movies))
 
     def load_movies(self, file):
         with open(file, 'r') as movie_file:
@@ -36,7 +36,7 @@ class MovieCollection(Movie):
     def save_movies(self, file):
         save_file = open(file, 'w')
         for movie in self.movies:
-            if movie.is_watched is True:
+            if movie.is_watched is True or movie.is_watched == 'Watched':
                 movie.is_watched = 'w'
             else:
                 movie.is_watched = 'u'

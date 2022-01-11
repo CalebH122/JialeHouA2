@@ -85,7 +85,7 @@ class MoviesToWatchApp(App):
                                                   'Fantasy, Thriller '
             else:
                 self.movies_to_watch.add_movie(
-                    Movie(self.root.ids.title.text, self.root.ids.year.text, self.root.ids.category.text,
+                    Movie(self.root.ids.title.text, int(self.root.ids.year.text), self.root.ids.category.text,
                           False))
                 self.load_movies()
                 self.root.ids.announcement.text = ''
@@ -100,7 +100,11 @@ class MoviesToWatchApp(App):
         self.root.ids.title.text = ""
         self.root.ids.year.text = ""
         self.root.ids.category.text = ""
-        self.root.ids.announcement.text = "Clear all fields"
+        self.root.ids.announcement.text = ""
+
+    def on_stop(self):
+        print(self.movies_to_watch)
+        self.movies_to_watch.save_movies('movies.csv')
 
 
 if __name__ == '__main__':
