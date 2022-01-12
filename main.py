@@ -1,8 +1,9 @@
 """
-Name:
-Date:
-Brief Project Description:
-GitHub URL:
+Name: Jiale Hou
+Date: 1/12/2022
+Brief Project Description: A Kivy GUI allows you load and save movies from csv file, add movie, sort movie and change
+movie watch status.
+GitHub URL: https://github.com/CalebH122/JialeHouA2
 """
 # TODO: Create your main program in this file, using the MoviesToWatchApp class
 
@@ -17,11 +18,13 @@ class MoviesToWatchApp(App):
     """..."""
 
     def __init__(self, **kwargs):
+        """Initialise the app"""
         super().__init__(**kwargs)
         self.movies_to_watch = MovieCollection()
         self.movies_to_watch.load_movies('movies.csv')
 
     def build(self):
+        """build app from kivy file"""
         self.title = "Movie to watch 2.0"
         self.root = Builder.load_file('app.kv')
         self.load_movies()
@@ -29,6 +32,7 @@ class MoviesToWatchApp(App):
         return self.root
 
     def load_movies(self):
+        """show all the movie in list"""
         for i, movie in enumerate(self.movies_to_watch.movies):
             movie_button = Button()
             movie_button.id = i
@@ -44,11 +48,13 @@ class MoviesToWatchApp(App):
             self.root.ids.watch_movie_status.text = f'To watch: {self.movies_to_watch.un_watched_num()}. Watched: {self.movies_to_watch.watched_movie_num()} '
 
     def sort(self, sort_choice):
+        """Sort all movies by sort choice"""
         self.movies_to_watch.sort(sort_choice)
         self.root.ids.movie_list.clear_widgets()
         self.load_movies()
 
     def change_button(self, button):
+        """Change the movie status and change the button when pressing"""
         for i, movie in enumerate(self.movies_to_watch.movies):
             if i == button.id:
                 if movie.is_watched:
@@ -70,6 +76,7 @@ class MoviesToWatchApp(App):
         self.sort(self.root.ids.sort.text)
 
     def add_movie(self):
+        """Add movie in to movie list"""
         category_list = ['Action', 'Comedy', 'Documentary', 'Drama', 'Fantasy', 'Thriller']
         try:
             if self.root.ids.title.text == '':
@@ -97,12 +104,14 @@ class MoviesToWatchApp(App):
             self.root.ids.announcement.text = 'Please enter a valid number'
 
     def clear_text(self):
+        """Clear all text in text filed"""
         self.root.ids.title.text = ""
         self.root.ids.year.text = ""
         self.root.ids.category.text = ""
         self.root.ids.announcement.text = ""
 
     def on_stop(self):
+        """Save all movie in to csv file when you close the app"""
         self.movies_to_watch.save_movies('movies.csv')
 
 
